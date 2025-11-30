@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: backend
-          image: duyk16/gaas-backend:latest
-          imagePullPolicy: Always
+          image: gaas-backend:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8000
           resources:

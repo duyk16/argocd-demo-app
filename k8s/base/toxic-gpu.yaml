@@ -26,8 +26,8 @@ spec:
               mountPath: /models
       containers:
         - name: toxic-service
-          image: duyk16/toxic-service:latest
-          imagePullPolicy: Always
+          image: toxic-service:latest
+          imagePullPolicy: Never
           env:
             - name: SERVICE_TYPE
               value: "cpu"

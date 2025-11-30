@@ -26,8 +26,8 @@ spec:
               mountPath: /models
       containers:
         - name: prompt-injection-service
-          image: duyk16/prompt-injection-service:latest
-          imagePullPolicy: Always
+          image: prompt-injection-service:latest
+          imagePullPolicy: Never
           env:
             - name: SERVICE_TYPE
               value: "cpu"
