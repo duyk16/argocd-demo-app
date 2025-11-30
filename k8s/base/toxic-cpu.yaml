@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toxic-cpu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: toxic-cpu
+  template:
+    metadata:
+      labels:
+        app: toxic-cpu
+    spec:
+      initContainers:
+        - name: model-downloader
+          image: python:3.11-slim
+          command:
+            - /bin/sh
+            - -c
+            - |
+              pip install --no-cache-dir transformers torch && \
+              python -c "from transformers import pipeline; pipeline('text-classification', model='martin-ha/toxic-comment-model', cache_dir='/models')"
+          volumeMounts:
+            - name: model-cache
+              mountPath: /models
+      containers:
+        - name: toxic-service
+          image: duyk16/toxic-service:latest
+          imagePullPolicy: Always
+          env:
+            - name: SERVICE_TYPE
+              value: "cpu"
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "1000m"
+              memory: "2Gi"
+          volumeMounts:
+            - name: model-cache
+              mountPath: /models
+      volumes:
+        - name: model-cache
+          persistentVolumeClaim:
+            claimName: toxic-model-cache
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: toxic-cpu-service
+spec:
+  selector:
+    app: toxic-cpu
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: ClusterIP

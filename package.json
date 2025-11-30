@@ -1,0 +1,10 @@
+{
+  "name": "gaas-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend": "cd apps/backend && uvicorn main:app --reload",
+    "build:frontend": "pnpm --filter frontend build"
+  }
+}
