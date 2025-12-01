@@ -20,7 +20,7 @@ spec:
             - -c
             - |
               pip install --no-cache-dir transformers torch && \
-              python -c "from transformers import pipeline; pipeline('text-classification', model='martin-ha/prompt-injection-comment-model', cache_dir='/models')"
+              python -c "from transformers import pipeline; pipeline('text-classification', model='protectai/deberta-v3-base-prompt-injection', cache_dir='/models')"
           volumeMounts:
             - name: model-cache
               mountPath: /models
