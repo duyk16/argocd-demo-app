@@ -3,11 +3,15 @@ from pydantic import BaseModel
 import httpx
 import os
 import logging
+from prometheus_fastapi_instrumentator import Instrumentator
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Guardrail Orchestrator Service")
+app = FastAPI(title="GaaS Backend Orchestrator")
+
+# Instrument Prometheus
+Instrumentator().instrument(app).expose(app)
 
 # Service endpoints
 SERVICES = {

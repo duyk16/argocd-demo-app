@@ -11,6 +11,9 @@ spec:
     metadata:
       labels:
         app: prompt-injection-cpu
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
     spec:
       initContainers:
         - name: model-downloader
