@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: toxic-model-cache
+  name: toxic-cpu-model-cache
 spec:
   accessModes:
     - ReadWriteOnce
@@ -12,7 +12,29 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: prompt-injection-model-cache
+  name: toxic-gpu-model-cache
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prompt-injection-cpu-model-cache
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prompt-injection-gpu-model-cache
 spec:
   accessModes:
     - ReadWriteOnce

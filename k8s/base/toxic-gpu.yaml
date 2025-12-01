@@ -48,7 +48,7 @@ spec:
       volumes:
         - name: model-cache
           persistentVolumeClaim:
-            claimName: toxic-model-cache
+            claimName: toxic-gpu-model-cache
 ---
 apiVersion: v1
 kind: Service
